@@ -8,12 +8,12 @@ import java.util.Random;
 public class Producer extends Thread {
 
     private Random r;
-    private IntegerFactory integerFactory;
+    private IntegerManager integerManager;
     private String producerName;
 
-    public Producer(IntegerFactory integerFactory, String producerName) {
+    public Producer(IntegerManager integerManager, String producerName) {
         this.r = new Random();
-        this.integerFactory = integerFactory;
+        this.integerManager = integerManager;
         this.producerName = producerName;
     }
 
@@ -21,9 +21,9 @@ public class Producer extends Thread {
     public void run() {
         for (int i = 0; i < Constants.PRODUCER_EMIT_COUNT; i++) {
             try {
-                int randomInt = r.nextInt(10000);
+                int randomInt = r.nextInt(100);
                 System.out.println("Produce: " + producerName + " producing " + randomInt);
-                integerFactory.putInteger(randomInt);
+                integerManager.putInteger(randomInt);
                 sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();

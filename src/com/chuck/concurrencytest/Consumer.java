@@ -11,10 +11,10 @@ public class Consumer extends Thread {
 
     private String consumerName;
     private List<Integer> integerList = new ArrayList<>();
-    private IntegerFactory integerFactory;
+    private IntegerManager integerManager;
 
-    public Consumer(IntegerFactory integerFactory, String consumerName) {
-        this.integerFactory = integerFactory;
+    public Consumer(IntegerManager integerManager, String consumerName) {
+        this.integerManager = integerManager;
         this.consumerName = consumerName;
     }
 
@@ -22,7 +22,7 @@ public class Consumer extends Thread {
     public void run() {
         while (integerList.size() < Constants.CONSUMER_MAX_CONSUME_COUNT) {
             try {
-                integerFactory.consumerInteger(this);
+                integerManager.consumerInteger(this);
                 sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();

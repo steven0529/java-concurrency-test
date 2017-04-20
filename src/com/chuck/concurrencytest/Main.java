@@ -9,7 +9,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        IntegerFactory intFactory = new IntegerFactory();
+        IntegerManager intFactory = new IntegerManager();
         Producer producerThread = new Producer(intFactory, "Producer A");
 
         List<Consumer> consumerList = new ArrayList<>();
