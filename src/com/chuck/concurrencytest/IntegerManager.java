@@ -19,12 +19,10 @@ public class IntegerManager {
         notifyAll();
     }
 
-    public synchronized void consumerInteger(Consumer consumer) throws InterruptedException {
-        if (integerQueue.size() > 0) {
-            int polledInt = integerQueue.poll();
-            consumer.consume(polledInt);
-        } else {
+    public synchronized int getInteger() throws InterruptedException {
+        while (integerQueue.size() == 0) {
             wait();
         }
+        return integerQueue.remove();
     }
 }

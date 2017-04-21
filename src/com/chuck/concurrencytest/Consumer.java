@@ -22,7 +22,9 @@ public class Consumer extends Thread {
     public void run() {
         while (integerList.size() < Constants.CONSUMER_MAX_CONSUME_COUNT) {
             try {
-                integerManager.consumerInteger(this);
+                int integer = integerManager.getInteger();
+                System.out.println("Consume: " + consumerName + " consuming " + integer);
+                integerList.add(integer);
                 sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -30,12 +32,7 @@ public class Consumer extends Thread {
         }
         Collections.sort(integerList);
         System.out.println("Sorted Array: " + consumerName + " " + integerList.toString());
-        stop();
     }
 
-    public synchronized void consume(int integer) {
-        System.out.println("Consume: " + consumerName + " consuming " + integer);
-        integerList.add(integer);
-    }
 
 }
